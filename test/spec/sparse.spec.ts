@@ -1,7 +1,6 @@
 import natsort from '../../src'
 
-describe('sparse array sort: ', () => {
-
+describe('sparse array sort:', () => {
   it('simple sparse array', () => {
     const arr1 = [3, 2]
     const arr2 = [1, 2, 3]
@@ -14,5 +13,4 @@ describe('sparse array sort: ', () => {
       expect(arr1[i]).toBe(arr2[i])
     }
   })
-
 })

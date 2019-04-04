@@ -1,27 +1,14 @@
-/* tslint:disable:max-line-length */
-
 import natsort from '../../src'
 
-describe('contributed tests: ', () => {
-
+describe('contributed tests:', () => {
   it('contributed - Bob Zeiner (Chrome not stable sort)', () => {
-    expect([
-      'T78', 'U17', 'U10', 'U12', 'U14', '745', 'U7', '485',
-      'S16', 'S2', 'S22', '1081', 'S25', '1055', '779', '776',
-      '771', '44', '4', '87', '1091', '42', '480', '952',
-      '951', '756', '1000', '824', '770', '666', '633', '619',
-      '1', '991', '77H', 'PIER-7', '47', '29', '9', '77L', '433',
-    ].sort(natsort())).toEqual([
-      '1', '4', '9', '29', '42', '44', '47', '77H', '77L', '87',
-      '433', '480', '485', '619', '633', '666', '745', '756',
-      '770', '771', '776', '779', '824', '951', '952', '991',
-      '1000', '1055', '1081', '1091', 'PIER-7', 'S2', 'S16',
-      'S22', 'S25', 'T78', 'U7', 'U10', 'U12', 'U14', 'U17',
-    ])
+    const arr1 = ['T78', 'U17', 'U10', 'U12', 'U14', '745', 'U7', '485', 'S16', 'S2', 'S22', '1081', 'S25', '1055', '779', '776', '771', '44', '4', '87', '1091', '42', '480', '952', '951', '756', '1000', '824', '770', '666', '633', '619', '1', '991', '77H', 'PIER-7', '47', '29', '9', '77L', '433'] // prettier-ignore
+    const arr2 = ['1', '4', '9', '29', '42', '44', '47', '77H', '77L', '87', '433', '480', '485', '619', '633', '666', '745', '756', '770', '771', '776', '779', '824', '951', '952', '991', '1000', '1055', '1081', '1091', 'PIER-7', 'S2', 'S16', 'S22', 'S25', 'T78', 'U7', 'U10', 'U12', 'U14', 'U17'] // prettier-ignore
+    expect(arr1.sort(natsort())).toEqual(arr2)
   })
 
   it('contributed - Scott', () => {
-    expect([
+    const arr1 = [
       'FSI stop, Position: 5',
       'Mail Group stop, Position: 5',
       'Mail Group stop, Position: 5',
@@ -29,8 +16,9 @@ describe('contributed tests: ', () => {
       'FSI stop, Position: 6',
       'Newsstand stop, Position: 4',
       'Newsstand stop, Position: 4',
-      'FSI stop, Position: 5',
-    ].sort(natsort())).toEqual([
+      'FSI stop, Position: 5'
+    ]
+    const arr2 = [
       'FSI stop, Position: 5',
       'FSI stop, Position: 5',
       'FSI stop, Position: 6',
@@ -38,303 +26,134 @@ describe('contributed tests: ', () => {
       'Mail Group stop, Position: 5',
       'Mail Group stop, Position: 5',
       'Newsstand stop, Position: 4',
-      'Newsstand stop, Position: 4',
-    ])
+      'Newsstand stop, Position: 4'
+    ]
+    expect(arr1.sort(natsort())).toEqual(arr2)
   })
 
   it('undefined support - jarvinen pekka', () => {
-    expect([
-      2,
-      10,
-      1,
-      'azd',
-      undefined,
-      'asd',
-    ].sort(natsort())).toEqual([
-      1,
-      2,
-      10,
-      'asd',
-      'azd',
-      undefined,
-    ])
+    const arr1 = [2, 10, 1, 'azd', undefined, 'asd']
+    const arr2 = [1, 2, 10, 'asd', 'azd', undefined]
+    expect(arr1.sort(natsort())).toEqual(arr2)
   })
 
   it('invalid numeric string sorting - guilermo.dev', () => {
-    expect([
-      '-1',
-      '-2',
-      '4',
-      '-3',
-      '0',
-      '-5',
-    ].sort(natsort())).toEqual([
-      '-5',
-      '-3',
-      '-2',
-      '-1',
-      '0',
-      '4',
-    ])
+    const arr1 = ['-1', '-2', '4', '-3', '0', '-5']
+    const arr2 = ['-5', '-3', '-2', '-1', '0', '4']
+    expect(arr1.sort(natsort())).toEqual(arr2)
   })
 
   it('invalid sort order - Howie Schecter', () => {
-    expect([
-      '9',
-      '11',
-      '22',
-      '99',
-      'A',
-      'aaaa',
-      'bbbb',
-      'Aaaa',
-      'aAaa',
-      'aa',
-      'AA',
-      'Aa',
-      'aA',
-      'BB',
-      'bB',
-      'aaA',
-      'AaA',
-      'aaa',
-    ].sort(natsort())).toEqual([
-      '9',
-      '11',
-      '22',
-      '99',
-      'A',
-      'AA',
-      'Aa',
-      'AaA',
-      'Aaaa',
-      'BB',
-      'aA',
-      'aAaa',
-      'aa',
-      'aaA',
-      'aaa',
-      'aaaa',
-      'bB',
-      'bbbb',
-    ])
+    const arr1 = ['9', '11', '22', '99', 'A', 'aaaa', 'bbbb', 'Aaaa', 'aAaa', 'aa', 'AA', 'Aa', 'aA', 'BB', 'bB', 'aaA', 'AaA', 'aaa'] // prettier-ignore
+    const arr2 = ['9', '11', '22', '99', 'A', 'AA', 'Aa', 'AaA', 'Aaaa', 'BB', 'aA', 'aAaa', 'aa', 'aaA', 'aaa', 'aaaa', 'bB', 'bbbb'] // prettier-ignore
+    expect(arr1.sort(natsort())).toEqual(arr2)
   })
 
   it('alphanumeric - number first', () => {
-    expect([
-      '5D',
-      '1A',
-      '2D',
-      '33A',
-      '5E',
-      '33K',
-      '33D',
-      '5S',
-      '2C',
-      '5C',
-      '5F',
-      '1D',
-      '2M',
-    ].sort(natsort())).toEqual([
-      '1A',
-      '1D',
-      '2C',
-      '2D',
-      '2M',
-      '5C',
-      '5D',
-      '5E',
-      '5F',
-      '5S',
-      '33A',
-      '33D',
-      '33K',
-    ])
+    const arr1 = ['5D', '1A', '2D', '33A', '5E', '33K', '33D', '5S', '2C', '5C', '5F', '1D', '2M']
+    const arr2 = ['1A', '1D', '2C', '2D', '2M', '5C', '5D', '5E', '5F', '5S', '33A', '33D', '33K']
+    expect(arr1.sort(natsort())).toEqual(arr2)
   })
 
   it('sorting incorrect when there is a space - adrien-be', () => {
-    expect([
-      'img 99',
-      'img199',
-      'imga99',
-      'imgz99',
-    ].sort(natsort())).toEqual([
-      'img 99',
-      'img199',
-      'imga99',
-      'imgz99',
-    ])
+    const arr1 = ['img 99', 'img199', 'imga99', 'imgz99']
+    const arr2 = ['img 99', 'img199', 'imga99', 'imgz99']
+    expect(arr1.sort(natsort())).toEqual(arr2)
   })
 
   it('expanded test', () => {
-    expect([
-      'img199',
-      'img 99',
-      'imga99',
-      'imgz 99',
-      'imgb99',
-      'imgz199',
-    ].sort(natsort())).toEqual([
-      'img 99',
-      'img199',
-      'imga99',
-      'imgb99',
-      'imgz 99',
-      'imgz199',
-    ])
+    const arr1 = ['img199', 'img 99', 'imga99', 'imgz 99', 'imgb99', 'imgz199']
+    const arr2 = ['img 99', 'img199', 'imga99', 'imgb99', 'imgz 99', 'imgz199']
+    expect(arr1.sort(natsort())).toEqual(arr2)
   })
 
   it('any zeros that precede a number messes up the sorting - menixator', () => {
-    expect([
-      '1',
-      '02',
-      '3',
-    ].sort(natsort())).toEqual([
-      '1',
-      '02',
-      '3',
-    ])
+    const arr1 = ['1', '02', '3']
+    const arr2 = ['1', '02', '3']
+    expect(arr1.sort(natsort())).toEqual(arr2)
   })
 
-  it('[\'1.100\', \'1.10\', \'1.1\', \'1.54\'] etc do not sort properly - rubenstolk', () => {
-    expect([
-      '1.100',
-      '1.1',
-      '1.10',
-      '1.54',
-    ].sort(natsort())).toEqual([
-      '1.100',
-      '1.1',
-      '1.10',
-      '1.54',
-    ])
+  it("['1.100', '1.10', '1.1', '1.54'] etc do not sort properly - rubenstolk", () => {
+    const arr1 = ['1.100', '1.1', '1.10', '1.54']
+    const arr2 = ['1.100', '1.1', '1.10', '1.54']
+    expect(arr1.sort(natsort())).toEqual(arr2)
   })
 
   it("['v1.100', 'v1.10', 'v1.1', 'v1.54'] etc do not sort properly - rubenstolk (bypass float coercion)", () => {
-    expect([
-      'v1.100',
-      'v1.1',
-      'v1.10',
-      'v1.1000',
-      'v1.54',
-    ].sort(natsort())).toEqual([
-      'v1.1',
-      'v1.10',
-      'v1.54',
-      'v1.100',
-      'v1.1000',
-    ])
+    const arr1 = ['v1.100', 'v1.1', 'v1.10', 'v1.1000', 'v1.54']
+    const arr2 = ['v1.1', 'v1.10', 'v1.54', 'v1.100', 'v1.1000']
+    expect(arr1.sort(natsort())).toEqual(arr2)
   })
 
   it('large numbers make sorting very slow - Mottie', () => {
-    expect([
+    const arr1 = [
       'MySnmp 1234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567',
       'MySnmp 4234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567',
       'MySnmp 2234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567',
-      'MySnmp 3234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567',
-    ].sort(natsort())).toEqual([
+      'MySnmp 3234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567'
+    ]
+    const arr2 = [
       'MySnmp 1234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567',
       'MySnmp 2234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567',
       'MySnmp 3234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567',
-      'MySnmp 4234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567',
-    ])
+      'MySnmp 4234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567'
+    ]
+    expect(arr1.sort(natsort())).toEqual(arr2)
   })
 
   it('javascript error', () => {
-    expect([
-      'bar.1-2',
-      'bar.1',
-    ].sort(natsort())).toEqual([
-      'bar.1',
-      'bar.1-2',
-    ])
+    const arr1 = ['bar.1-2', 'bar.1']
+    const arr2 = ['bar.1', 'bar.1-2']
+    expect(arr1.sort(natsort())).toEqual(arr2)
   })
 
   it("['SomeString', 'SomeString 1'] bombing on 'undefined is not an object' - dannycochran", () => {
-    expect([
-      'SomeString', 'SomeString 1',
-    ].sort(natsort())).toEqual([
-      'SomeString', 'SomeString 1',
-    ])
+    const arr1 = ['SomeString', 'SomeString 1']
+    const arr2 = ['SomeString', 'SomeString 1']
+    expect(arr1.sort(natsort())).toEqual(arr2)
   })
 
   it('sorting umlauts characters \xC4, \xD6, \xDC - diogoalves', () => {
-    expect([
-      'Udet',
-      '\xDCbelacker',
-      'Uell',
-      '\xDClle',
-      'Ueve',
-      '\xDCxk\xFCll',
-      'Uffenbach',
-    ].sort(natsort())).toEqual([
-      '\xDCbelacker',
-      'Udet',
-      'Uell',
-      'Ueve',
-      'Uffenbach',
-      '\xDClle',
-      '\xDCxk\xFCll',
-    ])
+    const arr1 = ['Udet', '\xDCbelacker', 'Uell', '\xDClle', 'Ueve', '\xDCxk\xFCll', 'Uffenbach']
+    const arr2 = ['\xDCbelacker', 'Udet', 'Uell', 'Ueve', 'Uffenbach', '\xDClle', '\xDCxk\xFCll']
+    expect(arr1.sort(natsort())).toEqual(arr2)
   })
 
   it("['2.2 sec','1.9 sec','1.53 sec'] - padded by spaces - harisb", () => {
-    expect([
-      '2.2 sec',
-      '1.9 sec',
-      '1.53 sec',
-    ].sort(natsort())).toEqual([
-      '1.53 sec',
-      '1.9 sec',
-      '2.2 sec',
-    ])
+    const arr1 = ['2.2 sec', '1.9 sec', '1.53 sec']
+    const arr2 = ['1.53 sec', '1.9 sec', '2.2 sec']
+    expect(arr1.sort(natsort())).toEqual(arr2)
   })
 
   it("['2.2sec','1.9sec','1.53sec'] - no padding - harisb", () => {
-    expect([
-      '2.2sec',
-      '1.9sec',
-      '1.53sec',
-    ].sort(natsort())).toEqual([
-      '1.53sec',
-      '1.9sec',
-      '2.2sec',
-    ])
+    const arr1 = ['2.2sec', '1.9sec', '1.53sec']
+    const arr2 = ['1.53sec', '1.9sec', '2.2sec']
+    expect(arr1.sort(natsort())).toEqual(arr2)
   })
 
   it('version string first and string last - jpuffer', () => {
-    expect([
+    const arr1 = [
       'version-3.27.3',
       'version-3.27.0',
       'version-3.26.0',
       'version-other',
       'version-3.28.0',
-      'version-3.29.1',
-    ].sort(natsort())).toEqual([
+      'version-3.29.1'
+    ]
+    const arr2 = [
       'version-3.26.0',
       'version-3.27.0',
       'version-3.27.3',
       'version-3.28.0',
       'version-3.29.1',
-      'version-other',
-    ])
+      'version-other'
+    ]
+    expect(arr1.sort(natsort())).toEqual(arr2)
   })
 
   it('partial version numbers (missing patch or minor) - jpuffer', () => {
-    expect([
-      '3.27.3',
-      '3.27',
-      '3',
-      'other',
-      '3.28',
-      '3.29.1',
-    ].sort(natsort())).toEqual([
-      '3',
-      '3.27',
-      '3.27.3',
-      '3.28',
-      '3.29.1',
-      'other',
-    ])
+    const arr1 = ['3.27.3', '3.27', '3', 'other', '3.28', '3.29.1']
+    const arr2 = ['3', '3.27', '3.27.3', '3.28', '3.29.1', 'other']
+    expect(arr1.sort(natsort())).toEqual(arr2)
   })
 })

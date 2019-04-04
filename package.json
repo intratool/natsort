@@ -38,27 +38,29 @@
   },
   "homepage": "https://github.com/bubkoo/natsort#readme",
   "devDependencies": {
-    "@types/jest": "^23.3.1",
+    "@types/jest": "^24.0.11",
     "coveralls": "^3.0.2",
-    "jest": "^23.5.0",
+    "jest": "^24.7.1",
+    "prettier": "^1.16.4",
     "rimraf": "^2.6.2",
-    "ts-jest": "^23.1.4",
+    "terser": "^3.17.0",
+    "ts-jest": "^24.0.1",
     "tslint": "^5.11.0",
     "tslint-config-airbnb": "^5.11.0",
-    "typescript": "^3.0.3",
-    "uglify-js": "^2.6.2"
+    "typescript": "^3.0.3"
   },
   "scripts": {
-    "lint": "tslint ./src/*.ts -c tslint.json -p tsconfig.json --fix",
-    "clean": "rimraf lib && rimraf dist",
-    "pretest": "rimraf ./test/coverage",
-    "test": "jest",
-    "coveralls": "cat ./test/coverage/lcov.info | coveralls",
-    "prepublish": "npm test",
-    "uglify": "uglifyjs ./dist/index.js -o ./dist/natsort.min.js -m -c",
-    "build:lib": "tsc",
+    "build": "npm run build:lib && npm run build:dist",
     "build:dist": "tsc -d false -m UMD --outDir ./dist && npm run uglify && rimraf ./dist/index.js",
+    "build:lib": "tsc",
+    "clean": "rimraf lib && rimraf dist",
+    "coveralls": "cat ./test/coverage/lcov.info | coveralls",
+    "lint": "tslint ./src/*.ts -c tslint.json -p tsconfig.json --fix",
     "prebuild": "npm run clean",
-    "build": "npm run build:lib && npm run build:dist"
+    "prepublish": "npm test",
+    "pretest": "rimraf ./test/coverage",
+    "prettify": "prettier --write '**/*.{js,json,ts}'",
+    "test": "jest",
+    "uglify": "terser ./dist/index.js -o ./dist/natsort.min.js -m -c"
   }
 }
