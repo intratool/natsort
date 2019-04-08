@@ -12,7 +12,7 @@ const toLowerCase = String.prototype.toLocaleLowerCase || String.prototype.toLow
 
 // Normalize values
 const normalize = (s: string | number, i: boolean) => {
-  const v: string = i ? toLowerCase.call(`${s}`) : `${s}`
+  const v: string = i ? toLowerCase.call(String(s)) : String(s)
   return v.replace(ONLY_STRING_REGEX, '')
 }
 
@@ -133,10 +133,13 @@ export default function natsort(options: OptionsType = {}) {
       if (af > bf) {
         return GREATER
       }
-      if (`${af}` < `${bf}`) {
+
+      const afs = String(af)
+      const bfs = String(bf)
+      if (afs < bfs) {
         return SMALLER
       }
-      if (`${af}` > `${bf}`) {
+      if (afs > bfs) {
         return GREATER
       }
     }
